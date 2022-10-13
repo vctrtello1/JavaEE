@@ -8,14 +8,9 @@ public class ConexionDB {
     private static String url = "jdbc:mysql://localhost:3306/Pruebas";
     private static String username = "root";
     private static String pass = "Puma18ar";
-    private static Connection connection;
 
-    public static Connection getInstance() throws SQLException{
-        if(connection == null){
-            connection = DriverManager.getConnection(url,username,pass);
+    public static Connection getInstance() throws SQLException {
 
-        }
-
-        return connection;
+        return DriverManager.getConnection(url, username, pass);
     }
 }

@@ -24,7 +24,9 @@ public class ProductoRepositoryImp implements Repository<Producto > {
     public List<Producto> listar() {
         List<Producto> productos = new ArrayList<>();
 
-        try(Statement statement = getConnection().createStatement();
+        try(
+        Connection connection = getConnection();
+        Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria, cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) ")){
             while(resultSet.next()){
                 Producto producto = crearProducto(resultSet);
@@ -42,7 +44,9 @@ public class ProductoRepositoryImp implements Repository<Producto > {
     @Override
     public Producto porID(long id) {
         Producto producto = null;
-        try(PreparedStatement preparedStatement = getConnection().
+        try(
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.
         prepareStatement("select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria,cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) where id_producto = ?;")){
             preparedStatement.setLong(1,id);
 
@@ -73,7 +77,9 @@ public class ProductoRepositoryImp implements Repository<Producto > {
         }
         
 
-        try(PreparedStatement preparedStatement = getConnection().prepareStatement(sql)){
+        try(
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setString(1, producto.getCnombre_articulo());
             preparedStatement.setFloat(2, producto.getFprecio());
@@ -102,7 +108,9 @@ public class ProductoRepositoryImp implements Repository<Producto > {
     @Override
     public void eliminar(Long id) {
 
-        try(PreparedStatement preparedStatement = getConnection().prepareStatement("delete from productos where id  = ?")){
+        try(
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from productos where id  = ?")){
             preparedStatement.setLong(1, id);
             preparedStatement.executeQuery();
 
