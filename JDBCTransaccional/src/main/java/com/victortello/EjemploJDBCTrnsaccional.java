@@ -1,16 +1,16 @@
-package com.victortello.jdbc;
+package com.victortello;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
-import com.victortello.jdbc.models.Categoria;
-import com.victortello.jdbc.models.Producto;
-import com.victortello.jdbc.repositories.ProductoRepositoryImp;
-import com.victortello.jdbc.repositories.Repository;
-import com.victortello.jdbc.utils.ConexionDB;
+import com.victortello.JDBCTransccional.models.Categoria;
+import com.victortello.JDBCTransccional.models.Producto;
+import com.victortello.JDBCTransccional.repositories.ProductoRepositoryImp;
+import com.victortello.JDBCTransccional.repositories.Repository;
+import com.victortello.JDBCTransccional.utils.ConexionDB;
 
-public class EjemploJDBC {
+public class EjemploJDBCTrnsaccional {
     public static void main(String[] args) {
 
         // cerrado de forma automatica

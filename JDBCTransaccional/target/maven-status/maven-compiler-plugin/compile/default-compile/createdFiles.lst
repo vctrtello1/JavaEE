@@ -1,0 +1,6 @@
+com/victortello/JDBCTransccional/repositories/Repository.class
+com/victortello/JDBCTransccional/models/Categoria.class
+com/victortello/JDBCTransccional/models/Producto.class
+com/victortello/EjemploJDBCTrnsaccional.class
+com/victortello/JDBCTransccional/utils/ConexionDB.class
+com/victortello/JDBCTransccional/repositories/ProductoRepositoryImp.class
