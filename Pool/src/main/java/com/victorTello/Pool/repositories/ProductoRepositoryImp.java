@@ -16,7 +16,7 @@ import com.victorTello.Pool.utils.ConexionDB;
 public class ProductoRepositoryImp implements Repository<Producto > {
 
     private Connection getConnection() throws SQLException{
-        return ConexionDB.getInstance();
+        return ConexionDB.getConnection();
 
     }
 

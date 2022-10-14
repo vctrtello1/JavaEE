@@ -3,3 +3,4 @@ com/victorTello/Pool/repositories/Repository.class
 com/victorTello/Pool/models/Categoria.class
 com/victorTello/Pool/repositories/ProductoRepositoryImp.class
 com/victorTello/Pool/models/Producto.class
+com/victorTello/Pool/PoolDeConexiones.class
