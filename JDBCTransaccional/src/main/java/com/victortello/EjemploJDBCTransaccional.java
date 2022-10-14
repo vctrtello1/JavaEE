@@ -10,7 +10,7 @@ import com.victortello.JDBCTransccional.repositories.ProductoRepositoryImp;
 import com.victortello.JDBCTransccional.repositories.Repository;
 import com.victortello.JDBCTransccional.utils.ConexionDB;
 
-public class EjemploJDBCTrnsaccional {
+public class EjemploJDBCTransaccional {
     public static void main(String[] args) {
 
         // cerrado de forma automatica
@@ -29,6 +29,9 @@ public class EjemploJDBCTrnsaccional {
             Categoria categoria = new Categoria();
             categoria.setId_categoria(2L);
             producto.setCategoria(categoria);
+
+            // deberia botar por que ya existe el sku
+            producto.setSku("1");
             repository.guardar(producto);
 
             System.out.println("________________________");

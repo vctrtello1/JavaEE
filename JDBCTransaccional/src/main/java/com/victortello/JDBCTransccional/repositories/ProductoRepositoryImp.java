@@ -13,9 +13,9 @@ import com.victortello.JDBCTransccional.models.Categoria;
 import com.victortello.JDBCTransccional.models.Producto;
 import com.victortello.JDBCTransccional.utils.ConexionDB;
 
-public class ProductoRepositoryImp implements Repository<Producto > {
+public class ProductoRepositoryImp implements Repository<Producto> {
 
-    private Connection getConnection() throws SQLException{
+    private Connection getConnection() throws SQLException {
         return ConexionDB.getInstance();
 
     }
@@ -24,93 +24,89 @@ public class ProductoRepositoryImp implements Repository<Producto > {
     public List<Producto> listar() {
         List<Producto> productos = new ArrayList<>();
 
-        try(Statement statement = getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery("select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria, cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) ")){
-            while(resultSet.next()){
+        try (Statement statement = getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery(
+                        "select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria, cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) ")) {
+            while (resultSet.next()) {
                 Producto producto = crearProducto(resultSet);
                 productos.add(producto);
             }
             resultSet.close();
-        }
-        catch(SQLException exception){
+        } catch (SQLException exception) {
             exception.printStackTrace();
         }
-        
+
         return productos;
     }
 
     @Override
     public Producto porID(long id) {
         Producto producto = null;
-        try(PreparedStatement preparedStatement = getConnection().
-        prepareStatement("select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria,cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) where id_producto = ?;")){
-            preparedStatement.setLong(1,id);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(
+                "select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria,cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) where id_producto = ?;")) {
+            preparedStatement.setLong(1, id);
 
             // try con recursos
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 if (resultSet.next()) {
                     producto = crearProducto(resultSet);
                 }
 
             }
-        }
-        catch(SQLException exception){
+        } catch (SQLException exception) {
             exception.printStackTrace();
-        }   
+        }
         return producto;
     }
 
     @Override
     public void guardar(Producto producto) {
         String sql;
-        if(producto.getId() != null && producto.getId() >0){
-            sql = "update productos set cnombre_articulo = ?,fprecio = ? ,dfecha_registro = ?,icategoria =? where id_producto = ?";
-        }
-        else{
-            sql = "insert into productos(cnombre_articulo,fprecio,dfecha_registro,icategoria) values (?,?,?,?)";
+        if (producto.getId() != null && producto.getId() > 0) {
+            sql = "update productos set cnombre_articulo = ?,fprecio = ? ,dfecha_registro = ?,icategoria =?,sku=? where id_producto = ?";
+        } else {
+            sql = "insert into productos(cnombre_articulo,fprecio,dfecha_registro,icategoria,sku) values (?,?,?,?,?)";
 
         }
-        
 
-        try(PreparedStatement preparedStatement = getConnection().prepareStatement(sql)){
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
 
             preparedStatement.setString(1, producto.getCnombre_articulo());
             preparedStatement.setFloat(2, producto.getFprecio());
             preparedStatement.setDate(3, new Date(producto.getDfecha_registro().getTime()));
             preparedStatement.setLong(4, producto.getCategoria().getId_categoria());
+            preparedStatement.setString(5, producto.getSku());
 
-            if(producto.getId() != null && producto.getId() > 0){
-            preparedStatement.setLong(5, producto.getId());
-            }
-            else {
+            if (producto.getId() != null && producto.getId() > 0) {
+                preparedStatement.setLong(5, producto.getId());
+            } else {
                 // forma de obtener la fecha
-                preparedStatement.setDate(3, new Date(producto.getDfecha_registro().getTime()));            
+                preparedStatement.setDate(3, new Date(producto.getDfecha_registro().getTime()));
 
             }
 
             preparedStatement.executeUpdate();
 
-        }
-        catch(Exception exception){
+        } catch (Exception exception) {
 
             exception.printStackTrace();
         }
-        
+
     }
 
     @Override
     public void eliminar(Long id) {
 
-        try(PreparedStatement preparedStatement = getConnection().prepareStatement("delete from productos where id  = ?")){
+        try (PreparedStatement preparedStatement = getConnection()
+                .prepareStatement("delete from productos where id  = ?")) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeQuery();
 
-        }
-        catch(Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
-        
+
     }
 
     private Producto crearProducto(ResultSet resultSet) throws SQLException {
@@ -125,5 +121,5 @@ public class ProductoRepositoryImp implements Repository<Producto > {
         producto.setCategoria(categoria);
         return producto;
     }
-    
+
 }
