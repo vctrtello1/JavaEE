@@ -1,11 +1,12 @@
 package com.victortello.JDBCTransccional.repositories;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface Repository <T>{
-    List<T> listar();
-    T porID(long id);
-    void guardar(T t);
-    void eliminar(Long id);
+    List<T> listar() throws SQLException;
+    T porID(long id) throws SQLException;
+    void guardar(T t) throws SQLException;
+    void eliminar(Long id) throws SQLException;
 
 }

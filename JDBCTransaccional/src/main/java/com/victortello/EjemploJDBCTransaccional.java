@@ -11,34 +11,70 @@ import com.victortello.JDBCTransccional.repositories.Repository;
 import com.victortello.JDBCTransccional.utils.ConexionDB;
 
 public class EjemploJDBCTransaccional {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         // cerrado de forma automatica
 
         try (Connection connection = ConexionDB.getInstance();) {
-            Repository<Producto> repository = new ProductoRepositoryImp();
-            repository.listar().forEach(System.out::println);
-            System.out.println("________________________");
 
-            System.out.println(repository.porID(2L));
-            Producto producto = new Producto();
-            producto.setId(1L);
-            producto.setCnombre_articulo("Caguama");
-            producto.setFprecio((float) 150);
-            producto.setDfecha_registro(new Date());
-            Categoria categoria = new Categoria();
-            categoria.setId_categoria(2L);
-            producto.setCategoria(categoria);
+            if (connection.getAutoCommit()) {
+                connection.setAutoCommit(false);
+            }
 
-            // deberia botar por que ya existe el sku
-            producto.setSku("1");
-            repository.guardar(producto);
+            try {
 
-            System.out.println("________________________");
-            repository.listar().forEach(System.out::println);
+                Repository<Producto> repository = new ProductoRepositoryImp();
+                repository.listar().forEach(System.out::println);
+                System.out.println("________________________");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+                System.out.println(repository.porID(2L));
+
+                // insertar nuevo produco
+
+                System.out.println("Nuevo producto");
+
+                Producto productoNuevo = new Producto();
+                productoNuevo.setCnombre_articulo("Marrucol");
+                productoNuevo.setFprecio((float) 150);
+                productoNuevo.setDfecha_registro(new Date());
+                Categoria categoriaNueva = new Categoria();
+                categoriaNueva.setId_categoria(2L);
+                productoNuevo.setCategoria(categoriaNueva);
+                productoNuevo.setSku("5");
+                repository.guardar(productoNuevo);
+
+                System.out.println("________________________");
+                repository.listar().forEach(System.out::println);
+
+
+                // Actualizar producto
+
+                System.out.println("Actualizar producto");
+
+                Producto producto = new Producto();
+                producto.setId(1L);
+                producto.setCnombre_articulo("Caguama");
+                producto.setFprecio((float) 150);
+                producto.setDfecha_registro(new Date());
+                Categoria categoria = new Categoria();
+                categoria.setId_categoria(2L);
+                producto.setCategoria(categoria);
+                producto.setSku("5");
+                repository.guardar(producto);
+
+                producto.setSku("1");
+                repository.guardar(producto);
+
+
+                System.out.println("________________________");
+                repository.listar().forEach(System.out::println);
+
+                connection.commit();
+            } catch (SQLException ex) {
+                connection.rollback();
+                ex.printStackTrace();
+            }
+
         }
 
     }

@@ -21,7 +21,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
     }
 
     @Override
-    public List<Producto> listar() {
+    public List<Producto> listar() throws SQLException {
         List<Producto> productos = new ArrayList<>();
 
         try (Statement statement = getConnection().createStatement();
@@ -33,15 +33,13 @@ public class ProductoRepositoryImp implements Repository<Producto> {
                 productos.add(producto);
             }
             resultSet.close();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
         }
 
         return productos;
     }
 
     @Override
-    public Producto porID(long id) {
+    public Producto porID(long id) throws SQLException {
         Producto producto = null;
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(
                 "select id_producto,cnombre_articulo,fprecio,dfecha_registro,sku,cnombre_categoria,id_categoria from productos p"
@@ -56,14 +54,12 @@ public class ProductoRepositoryImp implements Repository<Producto> {
                 }
 
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
         }
         return producto;
     }
 
     @Override
-    public void guardar(Producto producto) {
+    public void guardar(Producto producto) throws SQLException {
         String sql;
         if (producto.getId() != null && producto.getId() > 0) {
             sql = "update productos set cnombre_articulo= ?, fprecio = ?, dfecha_registro= ?,icategoria=?,sku=? where id_producto=?;";
@@ -90,23 +86,18 @@ public class ProductoRepositoryImp implements Repository<Producto> {
 
             preparedStatement.executeUpdate();
 
-        } catch (Exception exception) {
-
-            exception.printStackTrace();
         }
 
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void eliminar(Long id) throws SQLException {
 
         try (PreparedStatement preparedStatement = getConnection()
                 .prepareStatement("delete from productos where id  = ?")) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeQuery();
 
-        } catch (Exception exception) {
-            exception.printStackTrace();
         }
 
     }
