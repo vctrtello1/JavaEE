@@ -35,7 +35,7 @@ public class EjemploJDBCTransaccional {
 
                 Producto productoNuevo = new Producto();
                 productoNuevo.setCnombre_articulo("Marrucol");
-                productoNuevo.setFprecio((float) 150);
+                productoNuevo.setFprecio((float) 50);
                 productoNuevo.setDfecha_registro(new Date());
                 Categoria categoriaNueva = new Categoria();
                 categoriaNueva.setId_categoria(2L);
