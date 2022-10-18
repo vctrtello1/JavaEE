@@ -26,7 +26,8 @@ public class ProductoRepositoryImp implements Repository<Producto> {
 
         try (Statement statement = getConnection().createStatement();
                 ResultSet resultSet = statement.executeQuery(
-                        "select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria, cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) ")) {
+                        "select id_producto,cnombre_articulo,fprecio,dfecha_registro,sku,cnombre_categoria,id_categoria from productos p"
+                                + " inner join categorias c on (p.icategoria = c.id_categoria);")) {
             while (resultSet.next()) {
                 Producto producto = crearProducto(resultSet);
                 productos.add(producto);
@@ -43,7 +44,8 @@ public class ProductoRepositoryImp implements Repository<Producto> {
     public Producto porID(long id) {
         Producto producto = null;
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(
-                "select id_producto,cnombre_articulo, fprecio, dfecha_registro, id_categoria,cnombre_categoria from productos p inner join categorias c on (p.icategoria = c.id_categoria) where id_producto = ?;")) {
+                "select id_producto,cnombre_articulo,fprecio,dfecha_registro,sku,cnombre_categoria,id_categoria from productos p"
+                        + " inner join categorias c on (p.icategoria = c.id_categoria) where id_producto = ?;")) {
             preparedStatement.setLong(1, id);
 
             // try con recursos
@@ -64,7 +66,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
     public void guardar(Producto producto) {
         String sql;
         if (producto.getId() != null && producto.getId() > 0) {
-            sql = "update productos set cnombre_articulo = ?,fprecio = ? ,dfecha_registro = ?,icategoria =?,sku=? where id_producto = ?";
+            sql = "update productos set cnombre_articulo= ?, fprecio = ?, dfecha_registro= ?,icategoria=?,sku=? where id_producto=1;";
         } else {
             sql = "insert into productos(cnombre_articulo,fprecio,dfecha_registro,icategoria,sku) values (?,?,?,?,?)";
 
@@ -119,6 +121,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
         categoria.setId_categoria(resultSet.getLong("id_categoria"));
         categoria.setCnombre_categoria(resultSet.getString("cnombre_categoria"));
         producto.setCategoria(categoria);
+        producto.setSku(resultSet.getString("sku"));
         return producto;
     }
 
