@@ -22,8 +22,8 @@ public class EjemploJDBCTransaccional {
 
             System.out.println(repository.porID(2L));
             Producto producto = new Producto();
-            producto.setId(3L);
-            producto.setCnombre_articulo("Caviar");
+            producto.setId(1L);
+            producto.setCnombre_articulo("Caguama");
             producto.setFprecio((float) 150);
             producto.setDfecha_registro(new Date());
             Categoria categoria = new Categoria();

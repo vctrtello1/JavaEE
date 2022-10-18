@@ -66,7 +66,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
     public void guardar(Producto producto) {
         String sql;
         if (producto.getId() != null && producto.getId() > 0) {
-            sql = "update productos set cnombre_articulo= ?, fprecio = ?, dfecha_registro= ?,icategoria=?,sku=? where id_producto=1;";
+            sql = "update productos set cnombre_articulo= ?, fprecio = ?, dfecha_registro= ?,icategoria=?,sku=? where id_producto=?;";
         } else {
             sql = "insert into productos(cnombre_articulo,fprecio,dfecha_registro,icategoria,sku) values (?,?,?,?,?)";
 
@@ -81,7 +81,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
             preparedStatement.setString(5, producto.getSku());
 
             if (producto.getId() != null && producto.getId() > 0) {
-                preparedStatement.setLong(5, producto.getId());
+                preparedStatement.setLong(6, producto.getId());
             } else {
                 // forma de obtener la fecha
                 preparedStatement.setDate(3, new Date(producto.getDfecha_registro().getTime()));
