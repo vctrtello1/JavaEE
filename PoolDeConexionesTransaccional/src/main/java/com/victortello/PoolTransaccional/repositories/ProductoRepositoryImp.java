@@ -9,14 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.victortello.JDBCTransccional.utils.ConexionDB;
+
 import com.victortello.PoolTransaccional.models.Categoria;
 import com.victortello.PoolTransaccional.models.Producto;
+import com.victortello.PoolTransaccional.utils.ConexionDB;
 
 public class ProductoRepositoryImp implements Repository<Producto> {
 
     private Connection getConnection() throws SQLException {
-        return ConexionDB.getInstance();
+        return ConexionDB.getConnection();
 
     }
 
