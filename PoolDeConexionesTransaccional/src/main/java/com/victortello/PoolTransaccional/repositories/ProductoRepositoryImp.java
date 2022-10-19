@@ -9,23 +9,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.victortello.PoolTransaccional.models.Categoria;
 import com.victortello.PoolTransaccional.models.Producto;
-import com.victortello.PoolTransaccional.utils.ConexionDB;
 
 public class ProductoRepositoryImp implements Repository<Producto> {
 
-    private Connection getConnection() throws SQLException {
-        return ConexionDB.getConnection();
+    private Connection connection;
 
+    
+    public ProductoRepositoryImp(Connection connection) {
+        this.connection = connection;
     }
 
     @Override
     public List<Producto> listar() throws SQLException {
         List<Producto> productos = new ArrayList<>();
 
-        try (Statement statement = getConnection().createStatement();
+        try (Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(
                         "select id_producto,cnombre_articulo,fprecio,dfecha_registro,sku,cnombre_categoria,id_categoria from productos p"
                                 + " inner join categorias c on (p.icategoria = c.id_categoria);")) {
@@ -42,7 +42,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
     @Override
     public Producto porID(long id) throws SQLException {
         Producto producto = null;
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "select id_producto,cnombre_articulo,fprecio,dfecha_registro,sku,cnombre_categoria,id_categoria from productos p"
                         + " inner join categorias c on (p.icategoria = c.id_categoria) where id_producto = ?;")) {
             preparedStatement.setLong(1, id);
@@ -60,7 +60,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
     }
 
     @Override
-    public void guardar(Producto producto) throws SQLException {
+    public Producto guardar(Producto producto) throws SQLException {
         String sql;
         if (producto.getId() != null && producto.getId() > 0) {
             sql = "update productos set cnombre_articulo= ?, fprecio = ?, dfecha_registro= ?,icategoria=?,sku=? where id_producto=?;";
@@ -69,7 +69,8 @@ public class ProductoRepositoryImp implements Repository<Producto> {
 
         }
 
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                sql, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, producto.getCnombre_articulo());
             preparedStatement.setFloat(2, producto.getFprecio());
@@ -87,6 +88,18 @@ public class ProductoRepositoryImp implements Repository<Producto> {
 
             preparedStatement.executeUpdate();
 
+            if (producto.getId() == null) {
+                try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        producto.setId(resultSet.getLong(1));
+                    }
+
+                }
+
+            }
+
+            return producto;
+
         }
 
     }
@@ -94,7 +107,7 @@ public class ProductoRepositoryImp implements Repository<Producto> {
     @Override
     public void eliminar(Long id) throws SQLException {
 
-        try (PreparedStatement preparedStatement = getConnection()
+        try (PreparedStatement preparedStatement = connection
                 .prepareStatement("delete from productos where id  = ?")) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeQuery();
