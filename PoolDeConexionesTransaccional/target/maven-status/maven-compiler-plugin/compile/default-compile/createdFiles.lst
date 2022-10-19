@@ -1,0 +1,6 @@
+com/victortello/PoolTransaccional/repositories/Repository.class
+com/victortello/PoolTransaccional/models/Categoria.class
+com/victortello/PoolTransaccional/PoolTransaccional.class
+com/victortello/PoolTransaccional/repositories/ProductoRepositoryImp.class
+com/victortello/PoolTransaccional/models/Producto.class
+com/victortello/JDBCTransccional/utils/ConexionDB.class

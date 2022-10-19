@@ -1,16 +1,17 @@
-package com.victortello;
+package com.victortello.PoolTransaccional;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
-import com.victortello.JDBCTransccional.models.Categoria;
-import com.victortello.JDBCTransccional.models.Producto;
-import com.victortello.JDBCTransccional.repositories.ProductoRepositoryImp;
-import com.victortello.JDBCTransccional.repositories.Repository;
 import com.victortello.JDBCTransccional.utils.ConexionDB;
+import com.victortello.PoolTransaccional.models.Categoria;
+import com.victortello.PoolTransaccional.models.Producto;
+import com.victortello.PoolTransaccional.repositories.ProductoRepositoryImp;
+import com.victortello.PoolTransaccional.repositories.Repository;
 
-public class EjemploJDBCTransaccional {
+public class PoolTransaccional {
+
     public static void main(String[] args) throws SQLException {
 
         // cerrado de forma automatica
@@ -43,7 +44,6 @@ public class EjemploJDBCTransaccional {
                 // listar productos
                 repository.listar().forEach(System.out::println);
 
-
                 // Actualizar producto
 
                 System.out.println("Actualizar producto");
@@ -61,7 +61,6 @@ public class EjemploJDBCTransaccional {
 
                 producto.setSku("1");
                 repository.guardar(producto);
-
 
                 System.out.println("________________________");
                 // listar productos
