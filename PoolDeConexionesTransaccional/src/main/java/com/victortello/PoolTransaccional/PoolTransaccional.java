@@ -47,7 +47,7 @@ public class PoolTransaccional {
                 Categoria categoriaNueva = new Categoria();
                 categoriaNueva.setId_categoria(2L);
                 productoNuevo.setCategoria(categoriaNueva);
-                productoNuevo.setSku("5");
+                productoNuevo.setSku("6");
                 repositoryProducto.guardar(productoNuevo);
 
                 System.out.println("________________________");
@@ -65,10 +65,10 @@ public class PoolTransaccional {
                 producto.setDfecha_registro(new Date());
 
                 producto.setCategoria(nuevaCategoria);
-                producto.setSku("5");
+                producto.setSku("7");
                 repositoryProducto.guardar(producto);
 
-                producto.setSku("1");
+                producto.setSku("9");
                 repositoryProducto.guardar(producto);
 
                 System.out.println("________________________");
