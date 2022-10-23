@@ -95,7 +95,12 @@ public class CategoriaRepositoryImp implements Repository<Categoria> {
 
     @Override
     public void eliminar(Long id) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "delete from categorias where id_categoria = ?")) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeQuery();
 
+        }
     }
 
     private Categoria crearCategoria(ResultSet resultSet) throws SQLException {

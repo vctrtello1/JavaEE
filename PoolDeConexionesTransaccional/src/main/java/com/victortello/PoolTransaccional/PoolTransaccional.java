@@ -7,6 +7,7 @@ import java.util.Date;
 import com.victortello.JDBCTransccional.utils.ConexionDB;
 import com.victortello.PoolTransaccional.models.Categoria;
 import com.victortello.PoolTransaccional.models.Producto;
+import com.victortello.PoolTransaccional.repositories.CategoriaRepositoryImp;
 import com.victortello.PoolTransaccional.repositories.ProductoRepositoryImp;
 import com.victortello.PoolTransaccional.repositories.Repository;
 
@@ -24,7 +25,16 @@ public class PoolTransaccional {
 
             try {
 
-                Repository<Producto> repository = new ProductoRepositoryImp();
+                Repository<Producto> repositoryProducto = new ProductoRepositoryImp(connection);
+                Repository<Categoria> repositoryCategoria = new CategoriaRepositoryImp(connection);
+
+                // Instertar nueva categoria
+
+                System.out.println("Nueva categoria");
+
+                Categoria categoria = new Categoria();
+                categoria.setCnombre_categoria("linea blanca");
+                Categoria nuevaCategoria = repositoryCategoria.guardar(categoria);
 
                 // insertar nuevo produco
 
@@ -38,11 +48,11 @@ public class PoolTransaccional {
                 categoriaNueva.setId_categoria(2L);
                 productoNuevo.setCategoria(categoriaNueva);
                 productoNuevo.setSku("5");
-                repository.guardar(productoNuevo);
+                repositoryProducto.guardar(productoNuevo);
 
                 System.out.println("________________________");
                 // listar productos
-                repository.listar().forEach(System.out::println);
+                repositoryProducto.listar().forEach(System.out::println);
 
                 // Actualizar producto
 
@@ -53,18 +63,17 @@ public class PoolTransaccional {
                 producto.setCnombre_articulo("Caguama");
                 producto.setFprecio((float) 150);
                 producto.setDfecha_registro(new Date());
-                Categoria categoria = new Categoria();
-                categoria.setId_categoria(2L);
-                producto.setCategoria(categoria);
+
+                producto.setCategoria(nuevaCategoria);
                 producto.setSku("5");
-                repository.guardar(producto);
+                repositoryProducto.guardar(producto);
 
                 producto.setSku("1");
-                repository.guardar(producto);
+                repositoryProducto.guardar(producto);
 
                 System.out.println("________________________");
                 // listar productos
-                repository.listar().forEach(System.out::println);
+                repositoryProducto.listar().forEach(System.out::println);
 
                 connection.commit();
             } catch (SQLException ex) {
