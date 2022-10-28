@@ -1,87 +1,66 @@
 package com.victortello.PoolTransaccional;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
-import com.victortello.JDBCTransccional.utils.ConexionDB;
 import com.victortello.PoolTransaccional.models.Categoria;
 import com.victortello.PoolTransaccional.models.Producto;
-import com.victortello.PoolTransaccional.repositories.CategoriaRepositoryImp;
-import com.victortello.PoolTransaccional.repositories.ProductoRepositoryImp;
-import com.victortello.PoolTransaccional.repositories.Repository;
+import com.victortello.PoolTransaccional.service.CatalogoServicio;
+import com.victortello.PoolTransaccional.service.Servicio;
 
 public class PoolTransaccional {
 
     public static void main(String[] args) throws SQLException {
 
-        // cerrado de forma automatica
+        Servicio servicio = new CatalogoServicio();
 
-        try (Connection connection = ConexionDB.getInstance();) {
+        // Instertar nueva categoria
 
-            if (connection.getAutoCommit()) {
-                connection.setAutoCommit(false);
-            }
+        System.out.println("Nueva categoria");
 
-            try {
+        Categoria categoria = new Categoria();
+        categoria.setCnombre_categoria("linea blanca");
+        servicio.guardarCategoria(categoria);
 
-                Repository<Producto> repositoryProducto = new ProductoRepositoryImp(connection);
-                Repository<Categoria> repositoryCategoria = new CategoriaRepositoryImp(connection);
+        // insertar nuevo produco
 
-                // Instertar nueva categoria
+        System.out.println("Nuevo producto");
 
-                System.out.println("Nueva categoria");
+        Producto productoNuevo = new Producto();
+        productoNuevo.setCnombre_articulo("Marrucol");
+        productoNuevo.setFprecio((float) 50);
+        productoNuevo.setDfecha_registro(new Date());
+        Categoria categoriaNueva = new Categoria();
+        categoriaNueva.setId_categoria(2L);
+        productoNuevo.setCategoria(categoriaNueva);
+        productoNuevo.setSku("6");
+        servicio.guardarProductoConCategoria(productoNuevo, categoria);
 
-                Categoria categoria = new Categoria();
-                categoria.setCnombre_categoria("linea blanca");
-                Categoria nuevaCategoria = repositoryCategoria.guardar(categoria);
+        System.out.println("________________________");
+        // listar productos
+        servicio.listarProductos().forEach(System.out::println);
 
-                // insertar nuevo produco
+        // Actualizar producto
 
-                System.out.println("Nuevo producto");
+        System.out.println("Actualizar producto");
 
-                Producto productoNuevo = new Producto();
-                productoNuevo.setCnombre_articulo("Marrucol");
-                productoNuevo.setFprecio((float) 50);
-                productoNuevo.setDfecha_registro(new Date());
-                Categoria categoriaNueva = new Categoria();
-                categoriaNueva.setId_categoria(2L);
-                productoNuevo.setCategoria(categoriaNueva);
-                productoNuevo.setSku("6");
-                repositoryProducto.guardar(productoNuevo);
+        Producto producto = new Producto();
+        producto.setId(1L);
+        producto.setCnombre_articulo("Caguama");
+        producto.setFprecio((float) 150);
+        producto.setDfecha_registro(new Date());
 
-                System.out.println("________________________");
-                // listar productos
-                repositoryProducto.listar().forEach(System.out::println);
+        producto.setCategoria(categoria);
+        producto.setSku("7");
+        servicio.guardarProductoConCategoria(producto, categoria);
 
-                // Actualizar producto
+        producto.setSku("9");
+        servicio.guardarProductoConCategoria(producto, categoria);
 
-                System.out.println("Actualizar producto");
+        System.out.println("________________________");
+        // listar productos
+        servicio.listarProductos().forEach(System.out::println);
 
-                Producto producto = new Producto();
-                producto.setId(1L);
-                producto.setCnombre_articulo("Caguama");
-                producto.setFprecio((float) 150);
-                producto.setDfecha_registro(new Date());
-
-                producto.setCategoria(nuevaCategoria);
-                producto.setSku("7");
-                repositoryProducto.guardar(producto);
-
-                producto.setSku("9");
-                repositoryProducto.guardar(producto);
-
-                System.out.println("________________________");
-                // listar productos
-                repositoryProducto.listar().forEach(System.out::println);
-
-                connection.commit();
-            } catch (SQLException ex) {
-                connection.rollback();
-                ex.printStackTrace();
-            }
-
-        }
     }
 
 }

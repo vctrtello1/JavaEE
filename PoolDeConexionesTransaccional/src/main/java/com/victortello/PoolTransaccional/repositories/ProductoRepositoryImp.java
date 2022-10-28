@@ -16,8 +16,14 @@ public class ProductoRepositoryImp implements Repository<Producto> {
 
     private Connection connection;
 
-    
     public ProductoRepositoryImp(Connection connection) {
+        this.connection = connection;
+    }
+
+    public ProductoRepositoryImp() {
+    }
+
+    public void setConnection(Connection connection) {
         this.connection = connection;
     }
 

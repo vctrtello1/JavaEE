@@ -18,6 +18,13 @@ public class CategoriaRepositoryImp implements Repository<Categoria> {
         this.connection = connection;
     }
 
+    public CategoriaRepositoryImp() {
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public List<Categoria> listar() throws SQLException {
 
