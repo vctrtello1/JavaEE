@@ -20,6 +20,9 @@ public class FormServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
+        String pais = req.getParameter("pais");
+        String[] lenguajes = req.getParameterValues("lenguajes");
+        String[] roles = req.getParameterValues("roles");
         try (PrintWriter out = resp.getWriter()) {
 
             out.print("<!DOCTYPE html>");
@@ -35,7 +38,8 @@ public class FormServlet extends HttpServlet {
             out.print("<h1>");
             out.print("Resultado Form");
             out.print("</h1>");
-            out.print("parametros" + username + " " + password + " " + email);
+            out.print("parametros" + username + " " + password + " " + email + " " + pais + " " + lenguajes + " "
+                    + roles);
             out.print("</body>");
             out.print("</html>");
             out.close();
