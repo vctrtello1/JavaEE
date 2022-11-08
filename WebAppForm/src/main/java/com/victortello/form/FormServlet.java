@@ -2,7 +2,9 @@ package com.victortello.form;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +26,11 @@ public class FormServlet extends HttpServlet {
         String pais = req.getParameter("pais");
         String[] lenguajes = req.getParameterValues("lenguajes");
         String[] roles = req.getParameterValues("roles");
+
+        String idioma = req.getParameter("idioma");
+        String habilitar = req.getParameter("habilitar");
+        String secreto = req.getParameter("secreto");
+
         try (PrintWriter out = resp.getWriter()) {
 
             out.print("<!DOCTYPE html>");
@@ -40,28 +47,58 @@ public class FormServlet extends HttpServlet {
             out.print("Resultado Form");
             out.print("</h1>");
 
-            out.print("parametros" + username + " " + password + " " + email + " " + pais + " "
-                    + roles);
+            List<String> errores = new ArrayList<>();
 
-            // lista de lenguajes
+            // validar errores
 
-            if (lenguajes != null) {
-                out.println("<li>Lenguajes: <ul>");
-                Arrays.asList(lenguajes).forEach(lenguaje -> {
-                    out.print("<li>" + lenguaje + "</li>");
-                });
-                out.print("</ul></li>");
-
+            if (username == null || username.isBlank()) {
+                errores.add("el username es requerido");
             }
-            // lista de roles
 
-            if (roles != null) {
-                out.println("<li>Roles: <ul>");
-                Arrays.asList(roles).forEach(rol -> {
-                    out.print("<li>" + rol + "</li>");
+            if (password == null || password.isBlank()) {
+                errores.add("el password no puede ser vacio");
+            }
+
+            if (email == null || !email.contains("@")) {
+                errores.add("el email es requerido y debe tener un formato de correo");
+            }
+
+            if (errores.isEmpty()) {
+
+                // mostrar parametros
+
+                out.print(username + " " + password + " " + email + " " + pais + " ");
+
+                // lista de lenguajes
+
+                if (lenguajes != null) {
+                    out.println("<li>Lenguajes: <ul>");
+                    Arrays.asList(lenguajes).forEach(lenguaje -> {
+                        out.print("<li>" + lenguaje + "</li>");
+                    });
+                    out.print("</ul></li>");
+
+                }
+                // lista de roles
+
+                if (roles != null) {
+                    out.println("<li>Roles: <ul>");
+                    Arrays.asList(roles).forEach(rol -> {
+                        out.print("<li>" + rol + "</li>");
+                    });
+                    out.print("</ul></li>");
+
+                }
+
+                // parametros extras
+                out.print("<li>" + idioma + "</li>");
+                out.print("<li>" + habilitar + "</li>");
+                out.print("<li>" + secreto + "</li>");
+
+            } else {
+                errores.forEach(error -> {
+                    out.print("<li>" + error + "</li>");
                 });
-                out.print("</ul></li>");
-
             }
 
             out.print("</body>");
