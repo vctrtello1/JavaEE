@@ -2,6 +2,7 @@ package com.victortello.form;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,8 +39,31 @@ public class FormServlet extends HttpServlet {
             out.print("<h1>");
             out.print("Resultado Form");
             out.print("</h1>");
-            out.print("parametros" + username + " " + password + " " + email + " " + pais + " " + lenguajes + " "
+
+            out.print("parametros" + username + " " + password + " " + email + " " + pais + " "
                     + roles);
+
+            // lista de lenguajes
+
+            if (lenguajes != null) {
+                out.println("<li>Lenguajes: <ul>");
+                Arrays.asList(lenguajes).forEach(lenguaje -> {
+                    out.print("<li>" + lenguaje + "</li>");
+                });
+                out.print("</ul></li>");
+
+            }
+            // lista de roles
+
+            if (roles != null) {
+                out.println("<li>Roles: <ul>");
+                Arrays.asList(roles).forEach(rol -> {
+                    out.print("<li>" + rol + "</li>");
+                });
+                out.print("</ul></li>");
+
+            }
+
             out.print("</body>");
             out.print("</html>");
             out.close();
