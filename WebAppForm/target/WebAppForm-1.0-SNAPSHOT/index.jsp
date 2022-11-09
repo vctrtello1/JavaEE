@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-    <%@page import="java.util.List" %>
-        <% List<String> errores = (List<String>)request.getAttribute("errores"); %>
+    <%@page import="java.util.Map" %>
+        <% Map<String, String> errores = (Map<String, String>)request.getAttribute("errores"); %>
                 <!DOCTYPE html>
                 <html lang="en">
 
@@ -14,8 +14,8 @@
 
                     <% if(errores !=null && errores.size()>0){
                         %>
-                        <ul class="alert alert-danger mx-5 px-5">
-                            <% for(String error: errores){%>
+                        <ul>
+                            <% for(String error: errores.values()){%>
                                 <li>
                                     <%=error%>
                                 </li>
@@ -28,14 +28,17 @@
                                 <div>
                                     <label for="username">Usuario</label>
                                     <div><input type="text" name="username" id="username"></div>
+                                    <% if(errores !=null && errores.containsKey("username")){ out.print("<small style='color:red'>" + errores.get("username") + "</small>"); } %>
                                 </div>
                                 <div>
                                     <label for="password">Password</label>
                                     <div><input type="password" name="password" id="password"></div>
+                                    <% if(errores !=null && errores.containsKey("password")){ out.print("<small style='color:red'>" + errores.get("password") + "</small>"); } %>
                                 </div>
                                 <div>
                                     <label for="email">Email</label>
                                     <div><input type="text" name="email" id="email"></div>
+                                    <% if(errores !=null && errores.containsKey("email")){ out.print("<small style='color:red'>" + errores.get("email") + "</small>"); } %>
                                 </div>
                                 <div>
                                     <label for="pais">País</label>

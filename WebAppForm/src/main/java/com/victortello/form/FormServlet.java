@@ -2,9 +2,9 @@ package com.victortello.form;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,20 +31,20 @@ public class FormServlet extends HttpServlet {
         String habilitar = req.getParameter("habilitar");
         String secreto = req.getParameter("secreto");
 
-        List<String> errores = new ArrayList<>();
+        Map<String, String> errores = new HashMap<>();
 
         // validar errores
 
         if (username == null || username.isBlank()) {
-            errores.add("el username es requerido");
+            errores.put("username","el username es requerido");
         }
 
         if (password == null || password.isBlank()) {
-            errores.add("el password no puede ser vacio");
+            errores.put("password","el password no puede ser vacio");
         }
 
         if (email == null || !email.contains("@")) {
-            errores.add("el email es requerido y debe tener un formato de correo");
+            errores.put("coreo","el email es requerido y debe tener un formato de correo");
         }
         if (errores.isEmpty()) {
             try (PrintWriter out = resp.getWriter()) {
