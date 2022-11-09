@@ -31,39 +31,37 @@ public class FormServlet extends HttpServlet {
         String habilitar = req.getParameter("habilitar");
         String secreto = req.getParameter("secreto");
 
-        try (PrintWriter out = resp.getWriter()) {
+        List<String> errores = new ArrayList<>();
 
-            out.print("<!DOCTYPE html>");
-            out.print("<html>");
-            out.print("<head>");
-            out.print("<meta charset='UTF-8'>");
-            out.print("<meta http-equiv='X-UA-Compatible' content='IE=edge'>");
-            out.print("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-            out.print("<head>");
-            out.print("<title>Resultado Form</title>");
-            out.print("</head>");
-            out.print("<body>");
-            out.print("<h1>");
-            out.print("Resultado Form");
-            out.print("</h1>");
+        // validar errores
 
-            List<String> errores = new ArrayList<>();
+        if (username == null || username.isBlank()) {
+            errores.add("el username es requerido");
+        }
 
-            // validar errores
+        if (password == null || password.isBlank()) {
+            errores.add("el password no puede ser vacio");
+        }
 
-            if (username == null || username.isBlank()) {
-                errores.add("el username es requerido");
-            }
+        if (email == null || !email.contains("@")) {
+            errores.add("el email es requerido y debe tener un formato de correo");
+        }
+        if (errores.isEmpty()) {
+            try (PrintWriter out = resp.getWriter()) {
 
-            if (password == null || password.isBlank()) {
-                errores.add("el password no puede ser vacio");
-            }
-
-            if (email == null || !email.contains("@")) {
-                errores.add("el email es requerido y debe tener un formato de correo");
-            }
-
-            if (errores.isEmpty()) {
+                out.print("<!DOCTYPE html>");
+                out.print("<html>");
+                out.print("<head>");
+                out.print("<meta charset='UTF-8'>");
+                out.print("<meta http-equiv='X-UA-Compatible' content='IE=edge'>");
+                out.print("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
+                out.print("<head>");
+                out.print("<title>Resultado Form</title>");
+                out.print("</head>");
+                out.print("<body>");
+                out.print("<h1>");
+                out.print("Resultado Form");
+                out.print("</h1>");
 
                 // mostrar parametros
 
@@ -95,16 +93,18 @@ public class FormServlet extends HttpServlet {
                 out.print("<li>" + habilitar + "</li>");
                 out.print("<li>" + secreto + "</li>");
 
-            } else {
-                errores.forEach(error -> {
-                    out.print("<li>" + error + "</li>");
-                });
+                out.print("</body>");
+                out.print("</html>");
+                out.close();
+
             }
 
-            out.print("</body>");
-            out.print("</html>");
-            out.close();
+        } else {
+            req.setAttribute("errores", errores);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+            ;
         }
+
     }
 
 }
