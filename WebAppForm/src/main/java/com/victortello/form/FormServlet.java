@@ -44,7 +44,7 @@ public class FormServlet extends HttpServlet {
         }
 
         if (email == null || !email.contains("@")) {
-            errores.put("coreo","el email es requerido y debe tener un formato de correo");
+            errores.put("email","el email es requerido y debe tener un formato de correo");
         }
         if (errores.isEmpty()) {
             try (PrintWriter out = resp.getWriter()) {
