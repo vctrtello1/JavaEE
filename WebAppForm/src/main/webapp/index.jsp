@@ -19,7 +19,7 @@
 
                     <% if(errores !=null && errores.size()>0){
                         %>
-                        <ul class="alert alert-danger">
+                        <ul class="alert alert-danger mx-5 px-5">
                             <% for(String error: errores.values()){%>
                                 <li>
                                     <%=error%>
@@ -32,21 +32,18 @@
 
                                     <div class="row mb-3">
                                         <label for="username" class="col-form-label col-sm-2">Usuario</label>
-                                        <div class="col-sm-4"><input type="text" name="username" id="username"
-                                                class="form-control"></div>
-                                        <% if(errores !=null && errores.containsKey("username")){ out.print("<small class='alert alert-danger' style='color:red'>" + errores.get("username") + "</small>"); } %>
+                                        <div class="col-sm-4"><input type="text" name="username" id="username" class="form-control"></div>
+                                        <% if(errores !=null && errores.containsKey("username")){ out.print("<small class='row mb-3 alert alert-danger col-sm-4' style='color:red'>" + errores.get("username") + "</small>"); } %>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="password" class="col-form-label col-sm-2">Password</label>
-                                        <div class="col-sm-4"><input type="password" name="password" id="password"
-                                                class="form-control"></div>
-                                        <% if(errores !=null && errores.containsKey("password")){ out.print("<small class='alert alert-danger' style='color:red'>" + errores.get("password") + "</small>"); } %>
+                                        <div class="col-sm-4"><input type="password" name="password" id="password" class="form-control"></div>
+                                        <% if(errores !=null && errores.containsKey("password")){ out.print("<small class='row mb-3 alert alert-danger col-sm-4' style='color:red'>" + errores.get("password") + "</small>"); } %>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="email" class="col-form-label col-sm-2">Email</label>
-                                        <div class="col-sm-4"><input type="text" name="email" id="email"
-                                                class="form-control"></div>
-                                        <% if(errores !=null && errores.containsKey("email")){ out.print("<small class='alert alert-danger' style='color:red'>" + errores.get("email") + "</small>"); } %>
+                                        <div class="col-sm-4"><input type="text" name="email" id="email" class="form-control"></div>
+                                        <% if(errores !=null && errores.containsKey("email")){ out.print("<small class='row mb-3 alert alert-danger col-sm-4' style='color:red'>" + errores.get("email") + "</small>"); } %>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="pais" class="col-form-label col-sm-2">País</label>
@@ -65,8 +62,7 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="lenguajes" class="col-form-label col-sm-2">Lenguajes de
-                                            programación</label>
+                                        <label for="lenguajes" class="col-form-label col-sm-2">Lenguajes de programación</label>
                                         <div class="col-sm-4">
                                             <select name="lenguajes" id="lenguajes" multiple class="form-select">
                                                 <option value="java" selected>Java SE</option>
