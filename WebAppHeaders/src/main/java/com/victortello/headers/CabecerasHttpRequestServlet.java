@@ -36,8 +36,8 @@ public class CabecerasHttpRequestServlet extends HttpServlet {
             out.print("<body>");
             out.print("<h1>");
             out.print("Cabeceras");
-            out.print("</h1");
-            out.print("<ul");
+            out.print("</h1>");
+            out.print("<ul>");
             out.print("<li>" + metodoHttp + "</li>");
             out.print("<li>" + requestUri + "</li>");
             out.print("<li>" + requestUrl + "</li>");
