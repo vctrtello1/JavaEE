@@ -1,1 +1,5 @@
-com/victortello/Main.class
+com/victortello/controllers/LoginServlet.class
+com/victortello/services/ProductoService.class
+com/victortello/controllers/ProductoServlet.class
+com/victortello/models/Producto.class
+com/victortello/services/ProductoServiceImpl.class
