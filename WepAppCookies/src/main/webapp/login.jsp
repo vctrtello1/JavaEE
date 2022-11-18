@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,7 @@
 
 <body>
   <h1>Iniciar sesión</h1>
-  <form action="/webapp-cookie/login" method="post">
+  <form action="/WepAppCookies/login" method="post">
     <div>
       <label for="username">Username</label>
       <div>
