@@ -1,16 +1,18 @@
 package com.victortello.controllers;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Optional;
+
+import com.victortello.services.LoginService;
+import com.victortello.services.LoginServiceImpl;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Optional;
 
 @WebServlet({ "/login", "/login.htnl" })
 public class LoginServlet extends HttpServlet {
@@ -49,10 +51,10 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies() != null ? req.getCookies() : new Cookie[0];
 
-        Optional<Cookie> cookieOptional = Arrays.stream(cookies).filter(c -> "username".equals(c.getName())).findAny();
-        getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+        LoginService auth = new LoginServiceImpl();
+
+        Optional<String>  cookieOptional = auth.getUsername(req);
 
         if (cookieOptional.isPresent()) {
 
@@ -62,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<meta charset=\"UTF-8\">");
-                out.println("<title>Login correcto</title>");
+                out.println("<title>Hola " + cookieOptional.get() + "</title>");
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Login correcto!</h1>");
