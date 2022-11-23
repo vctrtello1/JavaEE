@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
             resp.addCookie(usernameCookie);
 
         }
-        resp.sendRedirect("/login.html");
+        resp.sendRedirect(req.getContextPath() + "/login");
 
     }
 

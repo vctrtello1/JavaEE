@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             Cookie usernamCookie = new Cookie("username", username);
             resp.addCookie(usernamCookie);
 
-            resp.sendRedirect(req.getContextPath() + "/login.html");
+            resp.sendRedirect(req.getContextPath() + "/login");
 
         } else {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
@@ -57,7 +57,8 @@ public class LoginServlet extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Login correcto!</h1>");
-                out.println("<p><a href='/index.html'>Volver</a></p>");
+                out.println("<p><a href='" + req.getContextPath() + "/index.html'>volver</a></p>");
+                out.println("<p><a href='" + req.getContextPath() + "/logout'>cerrar sesión</a></p>");
                 out.println("</body>");
                 out.println("</html>");
             }

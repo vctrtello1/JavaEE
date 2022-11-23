@@ -48,7 +48,7 @@ public class ProductoServlet extends HttpServlet {
                 out.println("</tr>");
             });
             out.println("</table>");
-            out.println("    </body>");
+            out.println("</body>");
             out.println("</html>");
         }
     }
