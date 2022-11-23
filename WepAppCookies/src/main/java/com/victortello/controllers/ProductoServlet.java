@@ -26,12 +26,12 @@ public class ProductoServlet extends HttpServlet {
 
             out.println("<!DOCTYPE html>");
             out.println("<html>");
-            out.println("    <head>");
-            out.println("        <meta charset=\"UTF-8\">");
-            out.println("        <title>Listado de Productos</title>");
-            out.println("    </head>");
-            out.println("    <body>");
-            out.println("        <h1>Listado de Productos!</h1>");
+            out.println("<head>");
+            out.println("<meta charset=\"UTF-8\">");
+            out.println("<title>Listado de Productos</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Listado de Productos!</h1>");
             out.println("<table>");
             out.println("<tr>");
             out.println("<th>id</th>");

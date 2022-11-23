@@ -29,20 +29,9 @@ public class LoginServlet extends HttpServlet {
 
             Cookie usernamCookie = new Cookie("username", username);
             resp.addCookie(usernamCookie);
-            try (PrintWriter out = resp.getWriter()) {
 
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<meta charset=\"UTF-8\">");
-                out.println("<title>Login correcto</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Login correcto!</h1>");
-                out.println("<h3>Hola " + username + " has iniciado sesión con éxito!</h3>");
-                out.println("</body>");
-                out.println("</html>");
-            }
+            resp.sendRedirect(req.getContextPath() + "/login.html");
+
         } else {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                     "Lo sentimos no esta autorizado para ingresar a esta página!");
@@ -54,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 
         LoginService auth = new LoginServiceImpl();
 
-        Optional<String>  cookieOptional = auth.getUsername(req);
+        Optional<String> cookieOptional = auth.getUsername(req);
 
         if (cookieOptional.isPresent()) {
 
@@ -68,7 +57,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Login correcto!</h1>");
-
+                out.println("<p><a href='/index.html'>Volver</a></p>");
                 out.println("</body>");
                 out.println("</html>");
             }
