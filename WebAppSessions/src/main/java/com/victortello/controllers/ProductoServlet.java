@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.victortello.models.Producto;
 import com.victortello.services.LoginService;
-import com.victortello.services.LoginServiceImpl;
+import com.victortello.services.LoginServiceCookieImpl;
 import com.victortello.services.ProductoService;
 import com.victortello.services.ProductoServiceImpl;
 
@@ -24,7 +24,7 @@ public class ProductoServlet extends HttpServlet {
         ProductoService service = new ProductoServiceImpl();
         List<Producto> productos = service.listar();
 
-        LoginService auth = new LoginServiceImpl();
+        LoginService auth = new LoginServiceCookieImpl();
         Optional<String> cookieOptional = auth.getUsername(req);
 
         resp.setContentType("text/html;charset=UTF-8");

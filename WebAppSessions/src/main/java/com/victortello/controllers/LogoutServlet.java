@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import com.victortello.services.LoginService;
-import com.victortello.services.LoginServiceImpl;
+import com.victortello.services.LoginServiceCookieImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,7 +19,7 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        LoginService auth = new LoginServiceImpl();
+        LoginService auth = new LoginServiceCookieImpl();
         Optional<String> username = auth.getUsername(req);
 
         if (username.isPresent()) {

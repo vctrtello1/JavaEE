@@ -5,11 +5,10 @@ import java.io.PrintWriter;
 import java.util.Optional;
 
 import com.victortello.services.LoginService;
-import com.victortello.services.LoginServiceImpl;
+import com.victortello.services.LoginServiceCookieImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,8 +26,7 @@ public class LoginServlet extends HttpServlet {
         if (USERNAME.equals(username) && PASSWORD.equals(password)) {
             resp.setContentType("text/html;charset=UTF-8");
 
-            Cookie usernameCookie = new Cookie("username", username);
-            resp.addCookie(usernameCookie);
+            req.getSession().setAttribute("username", username);
 
             resp.sendRedirect(req.getContextPath() + "/login");
 
@@ -41,7 +39,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        LoginService auth = new LoginServiceImpl();
+        LoginService auth = new LoginServiceCookieImpl();
 
         Optional<String> cookieOptional = auth.getUsername(req);
 
