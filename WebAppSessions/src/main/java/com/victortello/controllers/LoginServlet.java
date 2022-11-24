@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.Optional;
 
 import com.victortello.services.LoginService;
-import com.victortello.services.LoginServiceCookieImpl;
+import com.victortello.services.LoginServiceSessionsImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,11 +39,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        LoginService auth = new LoginServiceCookieImpl();
+        LoginService auth = new LoginServiceSessionsImpl();
 
-        Optional<String> cookieOptional = auth.getUsername(req);
+        Optional<String> usernameOptional = auth.getUsername(req);
 
-        if (cookieOptional.isPresent()) {
+        if (usernameOptional.isPresent()) {
 
             try (PrintWriter out = resp.getWriter()) {
 
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<meta charset=\"UTF-8\">");
-                out.println("<title>Hola " + cookieOptional.get() + "</title>");
+                out.println("<title>Hola " + usernameOptional.get() + "</title>");
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Login correcto!</h1>");
