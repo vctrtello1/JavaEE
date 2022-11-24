@@ -27,8 +27,8 @@ public class LoginServlet extends HttpServlet {
         if (USERNAME.equals(username) && PASSWORD.equals(password)) {
             resp.setContentType("text/html;charset=UTF-8");
 
-            Cookie usernamCookie = new Cookie("username", username);
-            resp.addCookie(usernamCookie);
+            Cookie usernameCookie = new Cookie("username", username);
+            resp.addCookie(usernameCookie);
 
             resp.sendRedirect(req.getContextPath() + "/login");
 
@@ -63,6 +63,8 @@ public class LoginServlet extends HttpServlet {
                 out.println("</html>");
             }
 
+        } else {
+            getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
 
     }

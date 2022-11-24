@@ -9,7 +9,7 @@
 
 <body>
   <h1>Iniciar sesión</h1>
-  <form action="/WepAppCookies/login" method="post">
+  <form action="/WebAppCookies/login" method="post">
     <div>
       <label for="username">Username</label>
       <div>
