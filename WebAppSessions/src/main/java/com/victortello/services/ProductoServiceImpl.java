@@ -15,7 +15,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Optional<Producto> byId(Long id) {
+    public Optional<Producto> findById(Long id) {
 
         return listar().stream().filter(p -> p.getId().equals(id)).findAny();
     }

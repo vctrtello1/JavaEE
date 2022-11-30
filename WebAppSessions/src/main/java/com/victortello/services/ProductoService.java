@@ -7,5 +7,5 @@ import com.victortello.models.Producto;
 
 public interface ProductoService {
     List<Producto> listar();
-    Optional<Producto> byId(Long id);
+    Optional<Producto> findById(Long id);
 }
