@@ -1,5 +1,7 @@
 package com.victortello.models;
 
+import java.util.Objects;
+
 public class ItemCarro {
     private int cantidad;
     private Producto producto;
@@ -29,4 +31,15 @@ public class ItemCarro {
         return cantidad * producto.getPrecio();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        // Override de equals con id de producto
+        if (this == obj) return true;
+        if (obj == null || getClass()  != obj.getClass()) return false;
+        ItemCarro itemCarro = (ItemCarro) obj;
+        return Objects.equals(producto.getId(), itemCarro.producto.getId());
+      
+    }
+
+    
 }
