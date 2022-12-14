@@ -2,10 +2,12 @@ com/victortello/controllers/LogoutServlet.class
 com/victortello/controllers/LoginServlet.class
 com/victortello/controllers/ProductoServlet.class
 com/victortello/models/ItemCarro.class
+com/victortello/models/Producto.class
+com/victortello/services/ProductoServiceImpl.class
+com/victortello/models/Carro.class
+com/victortello/controllers/VerCarroServlet.class
 com/victortello/services/LoginServiceCookieImpl.class
 com/victortello/services/LoginService.class
 com/victortello/services/ProductoService.class
-com/victortello/models/Producto.class
 com/victortello/services/LoginServiceSessionsImpl.class
-com/victortello/services/ProductoServiceImpl.class
-com/victortello/models/Carro.class
+com/victortello/controllers/AgregarCarroServlet.class

@@ -1,11 +1,13 @@
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/models/Producto.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/LoginServiceCookieImpl.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/models/ItemCarro.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/AgregarCarroServlet.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/ProductoServiceImpl.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/ProductoService.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/LoginServiceSessionsImpl.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LoginServlet.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LogoutServlet.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/LoginService.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/ProductoServlet.java
-/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LoginServlet.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/VerCarroServlet.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/models/Carro.java
-/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LogoutServlet.java
