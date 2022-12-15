@@ -27,8 +27,8 @@ public class ProductoServlet extends HttpServlet {
         LoginService auth = new LoginServiceSessionsImpl();
         Optional<String> usernameOptional = auth.getUsername(req);
 
-        String mensajeRequest = (String) req.getAttribute("mensaje");
-        String mensajeAplicacion = (String) getServletContext().getAttribute("mensaje");
+        String mensajeRequest = (String) req.getAttribute("mensajeRequest");
+        String mensajeAplicacion = (String) getServletContext().getAttribute("mensajeApp");
 
         resp.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = resp.getWriter()) {
