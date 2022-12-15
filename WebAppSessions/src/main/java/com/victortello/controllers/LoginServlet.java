@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet({ "/login", "/login.htnl" })
 public class LoginServlet extends HttpServlet {
-    final static String USERNAME = "admin";
-    final static String PASSWORD = "12345";
+    final static String USERNAME = "victorT";
+    final static String PASSWORD = "Marruco$67";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

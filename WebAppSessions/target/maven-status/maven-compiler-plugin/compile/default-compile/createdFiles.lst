@@ -7,6 +7,7 @@ com/victortello/models/Producto.class
 com/victortello/services/ProductoServiceImpl.class
 com/victortello/models/Carro.class
 com/victortello/controllers/VerCarroServlet.class
+com/victortello/listeners/AplicacionListener.class
 com/victortello/services/LoginServiceCookieImpl.class
 com/victortello/services/LoginService.class
 com/victortello/services/ProductoService.class
