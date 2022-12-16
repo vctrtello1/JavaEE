@@ -13,7 +13,7 @@
             <% if(carro==null || carro.getItems().isEmpty()){%>
                 <p>Lo sentimos no hay productos en el carro de compras!</p>
                 <%} else { %>
-                    <form name="formCarro" action="<%=request.getContextPath()%>/actualizarCarro" method="post">
+                    <form name="formCarro" action="<%=request.getContextPath()%>/carro/actualizar" method="post">
                         <table>
                             <tr>
                                 <th>id</th>

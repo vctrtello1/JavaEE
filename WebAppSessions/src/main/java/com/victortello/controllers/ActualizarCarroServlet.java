@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/actualizarCarro")
+@WebServlet("/carro/actualizar")
 public class ActualizarCarroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class ActualizarCarroServlet extends HttpServlet {
             updateCantidades(req, carro);
         }
 
-        resp.sendRedirect(req.getContextPath() + "/verCarro");
+        resp.sendRedirect(req.getContextPath() + "/carro/ver");
     }
 
     private void updateProductos(HttpServletRequest request, Carro carro) {

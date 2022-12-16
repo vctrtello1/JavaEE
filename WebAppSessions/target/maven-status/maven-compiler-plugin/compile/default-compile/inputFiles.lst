@@ -7,6 +7,7 @@
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/listeners/AplicacionListener.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/ProductoService.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/LoginServiceSessionsImpl.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/filters/LoginFilter.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LoginServlet.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LogoutServlet.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/LoginService.java

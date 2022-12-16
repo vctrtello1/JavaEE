@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/agregarACarro")
+@WebServlet("/carro/agregar")
 public class AgregarCarroServlet extends HttpServlet {
 
     @Override
@@ -33,7 +33,7 @@ public class AgregarCarroServlet extends HttpServlet {
             carro.addItemCarro(itemCarro);
         }
 
-        resp.sendRedirect(req.getContextPath() + "/verCarro");
+        resp.sendRedirect(req.getContextPath() + "/carro/ver");
     }
 
 }
