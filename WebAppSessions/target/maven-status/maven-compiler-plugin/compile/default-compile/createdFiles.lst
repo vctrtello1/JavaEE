@@ -1,10 +1,12 @@
 com/victortello/controllers/LogoutServlet.class
 com/victortello/controllers/LoginServlet.class
 com/victortello/filters/LoginFilter.class
+com/victortello/utils/ConexionJDBC.class
 com/victortello/controllers/ProductoServlet.class
 com/victortello/models/ItemCarro.class
 com/victortello/controllers/ActualizarCarroServlet.class
 com/victortello/models/Producto.class
+com/victortello/filters/ConexionFilter.class
 com/victortello/services/ProductoServiceImpl.class
 com/victortello/models/Carro.class
 com/victortello/controllers/VerCarroServlet.class
