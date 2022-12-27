@@ -57,10 +57,10 @@ public class ProductoServlet extends HttpServlet {
             productos.forEach(p -> {
                 out.println("<tr>");
                 out.println("<td>" + p.getId() + "</td>");
-                out.println("<td>" + p.getNombre() + "</td>");
-                out.println("<td>" + p.getTipo() + "</td>");
+                out.println("<td>" + p.getCnombre_articulo() + "</td>");
+                out.println("<td>" + p.getCategoria() + "</td>");
                 if (usernameOptional.isPresent()) {
-                    out.println("<td>" + p.getPrecio() + "</td>");
+                    out.println("<td>" + p.getFprecio() + "</td>");
                     out.println("<td><a href=\""
                             + req.getContextPath()
                             + "/carro/agregar?id=" + p.getId()

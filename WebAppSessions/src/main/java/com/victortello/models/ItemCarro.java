@@ -28,7 +28,8 @@ public class ItemCarro {
     }
 
     public int getImporte() {
-        return cantidad * producto.getPrecio();
+        //return cantidad * producto.getFprecio();
+        return cantidad;
     }
 
     @Override
