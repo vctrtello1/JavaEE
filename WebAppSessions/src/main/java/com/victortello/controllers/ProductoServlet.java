@@ -2,6 +2,7 @@ package com.victortello.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,7 @@ import com.victortello.models.Producto;
 import com.victortello.services.LoginService;
 import com.victortello.services.LoginServiceSessionsImpl;
 import com.victortello.services.ProductoService;
-import com.victortello.services.ProductoServiceImpl;
+import com.victortello.services.ProductoServiceJDBCImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,7 +22,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ProductoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductoService service = new ProductoServiceImpl();
+        Connection connection = (Connection) req.getAttribute("connection");
+        ProductoService service = new ProductoServiceJDBCImpl(connection);
         List<Producto> productos = service.listar();
 
         LoginService auth = new LoginServiceSessionsImpl();

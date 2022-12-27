@@ -10,7 +10,12 @@
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/filters/LoginFilter.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LoginServlet.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/filters/ConexionFilter.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/models/Categoria.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/LogoutServlet.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/exceptions/ServiceJDBCException.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/repositories/ProductoRepositoryImpl.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/repositories/Repository.java
+/Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/ProductoServiceJDBCImpl.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/services/LoginService.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/controllers/ProductoServlet.java
 /Users/victorhugotellomiramontes/GitHub/JavaEE/WebAppSessions/src/main/java/com/victortello/utils/ConexionJDBC.java

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.victortello.exceptions.ServiceJDBCException;
 import com.victortello.utils.ConexionJDBC;
 
 import jakarta.servlet.Filter;
@@ -31,9 +32,10 @@ public class ConexionFilter implements Filter {
                 request.setAttribute("connection", connection);
                 chain.doFilter(request, response);
                 connection.commit();
-            } catch (SQLException exception) {
+            } catch (SQLException | ServiceJDBCException exception) {
                 connection.rollback();
-                ((HttpServletResponse)response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, exception.getMessage());
+                ((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                        exception.getMessage());
                 exception.printStackTrace();
             }
 

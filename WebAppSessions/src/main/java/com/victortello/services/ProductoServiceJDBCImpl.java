@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import com.victortello.exceptions.ServiceJDBCException;
 import com.victortello.models.Producto;
 import com.victortello.repositories.ProductoRepositoryImpl;
 import com.victortello.repositories.Repository;
@@ -25,8 +26,7 @@ public class ProductoServiceJDBCImpl implements ProductoService {
             return repositoryJDBC.listar();
         } catch (SQLException e) {
 
-            e.printStackTrace();
-            return null;
+            throw new ServiceJDBCException(e.getMessage(), e.getCause());
         }
 
     }
@@ -37,9 +37,7 @@ public class ProductoServiceJDBCImpl implements ProductoService {
         try {
             return Optional.ofNullable(repositoryJDBC.findById(id));
         } catch (SQLException e) {
-
-            e.printStackTrace();
-            return null;
+            throw new ServiceJDBCException(e.getMessage(), e.getCause());
         }
 
     }

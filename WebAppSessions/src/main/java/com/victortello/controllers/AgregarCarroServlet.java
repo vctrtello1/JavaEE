@@ -1,13 +1,14 @@
 package com.victortello.controllers;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Optional;
 
 import com.victortello.models.Carro;
 import com.victortello.models.ItemCarro;
 import com.victortello.models.Producto;
 import com.victortello.services.ProductoService;
-import com.victortello.services.ProductoServiceImpl;
+import com.victortello.services.ProductoServiceJDBCImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,7 +24,8 @@ public class AgregarCarroServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Long id = Long.parseLong(req.getParameter("id"));
-        ProductoService productoService = new ProductoServiceImpl();
+        Connection connection = (Connection) req.getAttribute("connection");
+        ProductoService productoService = new ProductoServiceJDBCImpl(connection);
         Optional<Producto> producto = productoService.findById(id);
 
         if (producto.isPresent()) {
